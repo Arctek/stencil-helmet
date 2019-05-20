@@ -25,8 +25,17 @@ export function meta(node: VNode, head: HTMLElement) {
   }
 }
 
-export function link(node: VNode) {
+export function link(node: VNode, head: HTMLElement) {
   if (!hasChildren(node)) {
+    if (hasAttributes(node, ['rel'])) {
+      const existingElement = head.querySelector(`link[rel="${node.vattrs.rel}"]`);
+      if (existingElement !== null) {
+        return [
+            createElement(node),
+            existingElement
+        ];
+      }
+    }
     return createElement(node);
   }
 }

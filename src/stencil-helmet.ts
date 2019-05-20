@@ -12,13 +12,15 @@ const isValidNode = (node: VNode) =>
 const renderNode = (node: VNode) =>
   render[node.vtag](node, document.head);
 
-export const Helmet = ({ children = [] }: Props) => {
+export const Helmet = (props: Props = null, children: VNode[] = []) => {
   if (headExists) {
-    children
-      .filter(isValidNode)
-      .map(renderNode)
-      .filter(shouldApplyToHead)
-      .forEach(applyToHead);
+    try {
+      children
+        .filter(isValidNode)
+        .map(renderNode)
+        .filter(shouldApplyToHead)
+        .forEach(applyToHead);
+    } catch (err) {}
   }
   return null;
 };
