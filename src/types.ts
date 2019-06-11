@@ -1,17 +1,18 @@
 declare global {
-  const h: Function
+    const h: Function
 }
 
 export interface Props {
-  [key: string]: any
+    [key: string]: any
 }
 
 export interface VNode {
-  vtag?: string | number;
-  vkey?: string | number;
-  vtext?: string;
-  vchildren?: VNode[];
-  vattrs?: any;
-  vref?: (elm: any) => void;
-  elm?: Element|Node;
+    $tag$?: string | number;
+    $key$?: string | number;
+    $text$?: string;
+    $children$?: VNode[];
+    $attrs$?: any;
+    $name$?: string;
+    $flags$: number;
+    $elm$?: any;
 }

@@ -1,7 +1,7 @@
 import { hasAttributes, hasChildren, isTextNode } from './util';
 import { createElement } from './dom';
 export function title(node, head) {
-    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    if (hasChildren(node) && isTextNode(node.$children$[0])) {
         return [
             createElement(node),
             head.querySelector('title')
@@ -10,7 +10,7 @@ export function title(node, head) {
 }
 export function meta(node, head) {
     if (hasAttributes(node, ['name', 'content'])) {
-        const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
+        const existingElement = head.querySelector(`meta[name="${node.$attrs$.name}"]`);
         if (existingElement !== null) {
             return [
                 createElement(node),
@@ -25,7 +25,7 @@ export function meta(node, head) {
 export function link(node, head) {
     if (!hasChildren(node)) {
         if (hasAttributes(node, ['rel'])) {
-            const existingElement = head.querySelector(`link[rel="${node.vattrs.rel}"]`);
+            const existingElement = head.querySelector(`link[rel="${node.$attrs$.rel}"]`);
             if (existingElement !== null) {
                 return [
                     createElement(node),
@@ -37,7 +37,7 @@ export function link(node, head) {
     }
 }
 export function style(node) {
-    if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+    if (hasChildren(node) && isTextNode(node.$children$[0])) {
         return createElement(node);
     }
 }

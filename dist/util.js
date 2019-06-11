@@ -1,6 +1,6 @@
 const isObject = (val) => !Array.isArray(val) && val !== null && typeof val === 'object';
-export const hasChildren = ({ vchildren }) => Array.isArray(vchildren);
-export const hasAttributes = ({ vattrs }, requiredAttrs = []) => isObject(vattrs) && requiredAttrs.every(vattrs.hasOwnProperty.bind(vattrs));
-export const isTextNode = ({ vtext }) => typeof vtext === 'string';
+export const hasChildren = ({ $children$ }) => Array.isArray($children$);
+export const hasAttributes = ({ $attrs$ }, requiredAttrs = []) => isObject($attrs$) && requiredAttrs.every($attrs$.hasOwnProperty.bind($attrs$));
+export const isTextNode = ({ $text$ }) => typeof $text$ === 'string';
 export const isElement = (val) => val instanceof HTMLElement;
 export const isElementArray = (val) => Array.isArray(val) && val.every(isElement);

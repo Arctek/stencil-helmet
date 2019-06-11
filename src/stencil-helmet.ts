@@ -2,25 +2,25 @@ import * as render from './render';
 import { VNode, Props } from './types';
 import { shouldApplyToHead, applyToHead } from './dom';
 
-const headExists = document && document.head;
-
 const validTagNames = Object.keys(render);
 
 const isValidNode = (node: VNode) =>
-  validTagNames.indexOf(node.vtag as string) > -1;
+  validTagNames.indexOf(node.$tag$ as string) > -1;
 
 const renderNode = (node: VNode) =>
-  render[node.vtag](node, document.head);
+  render[node.$tag$](node, document.head);
 
 export const Helmet = (props: Props = null, children: VNode[] = []) => {
-  if (headExists) {
+  if (document && document.head) {
     try {
       children
         .filter(isValidNode)
         .map(renderNode)
         .filter(shouldApplyToHead)
         .forEach(applyToHead);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
   }
   return null;
 };

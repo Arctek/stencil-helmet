@@ -3,7 +3,7 @@ import { createElement } from './dom';
 import { VNode } from './types';
 
 export function title(node: VNode, head: HTMLElement) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+  if (hasChildren(node) && isTextNode(node.$children$[0])) {
     return [
       createElement(node),
       head.querySelector('title')
@@ -13,7 +13,7 @@ export function title(node: VNode, head: HTMLElement) {
 
 export function meta(node: VNode, head: HTMLElement) {
   if (hasAttributes(node, ['name', 'content'])) {
-    const existingElement = head.querySelector(`meta[name="${node.vattrs.name}"]`);
+    const existingElement = head.querySelector(`meta[name="${node.$attrs$.name}"]`);
     if (existingElement !== null) {
       return [
         createElement(node),
@@ -28,7 +28,7 @@ export function meta(node: VNode, head: HTMLElement) {
 export function link(node: VNode, head: HTMLElement) {
   if (!hasChildren(node)) {
     if (hasAttributes(node, ['rel'])) {
-      const existingElement = head.querySelector(`link[rel="${node.vattrs.rel}"]`);
+      const existingElement = head.querySelector(`link[rel="${node.$attrs$.rel}"]`);
       if (existingElement !== null) {
         return [
             createElement(node),
@@ -41,7 +41,7 @@ export function link(node: VNode, head: HTMLElement) {
 }
 
 export function style(node: VNode) {
-  if (hasChildren(node) && isTextNode(node.vchildren[0])) {
+  if (hasChildren(node) && isTextNode(node.$children$[0])) {
     return createElement(node);
   }
 }

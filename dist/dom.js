@@ -1,16 +1,16 @@
 import { isElement, isElementArray } from './util';
-export const createElement = ({ vtag, vattrs, vchildren, vtext }) => {
-    if (vtext != null) {
-        return document.createTextNode(vtext);
+export const createElement = ({ $tag$, $attrs$, $children$, $text$ }) => {
+    if ($text$ != null) {
+        return document.createTextNode($text$);
     }
-    const element = document.createElement(vtag);
-    if (vattrs != null) {
-        for (const key in vattrs) {
-            element.setAttribute(key, vattrs[key]);
+    const element = document.createElement($tag$);
+    if ($attrs$ != null) {
+        for (const key in $attrs$) {
+            element.setAttribute(key, $attrs$[key]);
         }
     }
-    if (vchildren != null) {
-        for (const child of vchildren) {
+    if ($children$ != null) {
+        for (const child of $children$) {
             element.appendChild(createElement(child));
         }
     }

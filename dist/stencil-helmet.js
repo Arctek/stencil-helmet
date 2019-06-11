@@ -1,11 +1,10 @@
 import * as render from './render';
 import { shouldApplyToHead, applyToHead } from './dom';
-const headExists = document && document.head;
 const validTagNames = Object.keys(render);
-const isValidNode = (node) => validTagNames.indexOf(node.vtag) > -1;
-const renderNode = (node) => render[node.vtag](node, document.head);
+const isValidNode = (node) => validTagNames.indexOf(node.$tag$) > -1;
+const renderNode = (node) => render[node.$tag$](node, document.head);
 export const Helmet = (props = null, children = []) => {
-    if (headExists) {
+    if (document && document.head) {
         try {
             children
                 .filter(isValidNode)
@@ -13,7 +12,9 @@ export const Helmet = (props = null, children = []) => {
                 .filter(shouldApplyToHead)
                 .forEach(applyToHead);
         }
-        catch (err) { }
+        catch (err) {
+            console.log(err);
+        }
     }
     return null;
 };
